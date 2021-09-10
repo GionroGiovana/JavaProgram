@@ -2,11 +2,21 @@ package com.company;
 
 public class User {
 
+    private static int maxId = 0;
     private String name;
+    private int id;
     private String password;
     private String login;       //email
     private String users[] = new String[100];
-    private int id = 0;
+
+    public User(String name, String login, String password){
+        maxId--;
+        maxId++;
+        id = maxId;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+    }
 
     public String getName() {
         return name;
@@ -31,20 +41,7 @@ public class User {
     public void setLogin(String login) {
         this.login = login;
     }
-
-    public void addUser(String name, String login, String password){
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        for(int i = 0; i < users.length; i++){
-            users[id] = this.name + ", " + this.login + ", " + this.password;
-            id++;
-        }
-    }
-
-    public void showUsers(){
-        for(int i = 0; i < users.length; i++){
-            System.out.println(users[i]);
-        }
+    public static int getMaxId() {
+        return maxId;
     }
 }

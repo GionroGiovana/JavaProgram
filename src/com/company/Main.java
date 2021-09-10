@@ -13,35 +13,40 @@ public class Main {
 
         Scanner reader = new Scanner(System.in);
 
+        User users[] = new User[100];
+
         while (true){
 
 
             System.out.println("Выбор действия!\n\n1 - Добавить пользователя\n2 - Информация о пользователях\n3 - Изменить пользователя\n4 - Удалить пользователя\n5 - Выход");
 
             String act = reader.nextLine();
-            User user = new User();
+
+
+            int id;
 
             if(act.equals("1")){
                 while (true){
-                    System.out.println("Новый пользователь!\n");
-
+                    int newUserId = User.getMaxId();
                     System.out.print("Имя: ");
                     String name = reader.nextLine();
-                    user.setName(name);
-
-                    System.out.print("Email: ");
+                    System.out.print("Логин: ");
                     String login = reader.nextLine();
-                    user.setLogin(login);
-
                     System.out.print("Пароль: ");
                     String password = reader.nextLine();
-                    user.setPassword(password);
-                    user.addUser(name, login, password);
+
+                    users[newUserId] = new User(name, login, password);
+
                     break;
                 }
             }
             else if(act.equals("2")){
-                user.showUsers();
+                System.out.println("Список пользователей\n");
+                for (int i = 0; i < users.length; i++){
+                    if(users[i] != null){
+                        System.out.printf("Имя: %s, Логин: %s, Password: %s", users[i].getName(), users[i].getLogin(), users[i].getPassword());
+                    }
+                }
             }
             else if(act.equals("3")){
 
